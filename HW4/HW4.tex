@@ -1,0 +1,145 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=0.6in]{geometry}
+\setlength{\parindent}{0em}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{collectbox}
+\usepackage{array}
+\usepackage{calc}
+\usepackage{mathtools}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+	language=C++,
+	aboveskip=6mm,
+	belowskip=6mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=none,
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve},
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=3
+}
+
+\begin{document}
+\title{B503 Homework Assignment 4}
+\author{Oyedotun Oyesanmi}
+\date{\today}
+\maketitle
+
+
+\textbf{Answer 1:}\\
+
+\begin{lstlisting}
+int smallest_nontrivial_divisor (int n)
+{
+     if (n <= 1) // We don’t want to deal with integers <= 1, so if
+         return 0; // such an integer is given, return a nonsense answer.
+     else
+    {
+         int k;
+         for (k = 2; k * k <= n; ++k)
+             if (n % k == 0)  // If n is divisible by k then we have
+                 return k; // found the divisor we were hunting for.
+                 
+        // If the loop ends without finding a divisor less than or
+        // equal to the square root of n, then n must be prime,
+         // so its only divisor aside from 1 is n.
+      return n;
+   }
+}
+\end{lstlisting}
+
+\underline{Space Complexity.}\\
+
+ Function \texttt{smallest\_nontrivial\_divisor} will require one stack frame for its call within \texttt{main()}. This stack frame contains address, all local variables,  \texttt{k}, all the parameter values that have been passed,  \texttt{n}, and space for the value that will be returned by the function,  \texttt{n}.
+ 
+ Since there is a fixed number of local variable of constant size, i.e independent of the size of the input, the amount of of memory space required by a call to this function is some constant.\\
+ 
+ \underline{Time Complexity.}\\
+ 
+ The following basic operation takes constant time i.e $O(1)$:
+ 
+\begin{enumerate}
+	\setlength{\itemsep}{6pt}
+	\setlength{\parskip}{0pt}
+	\setlength{\parsep}{0pt}
+	\item \texttt{if(n <= 1)}
+	\item \texttt{int k}
+	\item \texttt{if(n \% k == 0)}
+	\item \texttt{return k}
+	\item \texttt{return n}
+\end{enumerate}
+
+Therefore, has no effect in time complexity of the loop.\\ 
+
+  \texttt{for(k = 2; k*k <= n; ++k)} has a total of \texttt{$\floor {\sqrt{n}}$} iterations.\\
+ 
+ Total number of iterations will therefore be = $\Theta{(\sqrt{n})}$\\\\
+ 
+ \textbf{Answer 2:}\\
+ 
+ 
+\begin{lstlisting}
+int k, j;
+for (k = 0; k < n * n; ++k)
+    for (j = n; j >= 1; –j)
+        { The execution time for the body of this loop is bounded by constants. }
+\end{lstlisting}
+ 
+ Outer loop will iterate $n^2~times$ .\\
+ 
+ Inner Loop is independent of the outer loop and will  iterate $n~times.$ Starting from \texttt{j = n} and \texttt{j} decrements until \texttt{j >= 1} \\
+ 
+ Total number of iterations therefore is : $(n^2)(n)$, therefore time complexity =  \underline{$\Theta{n^3}$}\\\\
+ 
+
+ 
+  \textbf{Answer 3:}\\
+  
+  \begin{lstlisting}
+int k, j; for (k = 1; k <= n; ++k)
+    for (j = 1; j * j <= n; ++j)
+        { The execution time for the body of this loop is bounded by constants. }
+  \end{lstlisting}
+  
+Outer loop will iterate $n~times$ .\\
+ 
+Inner loop is independent of the outer loop and will  iterate \texttt{$\floor {\sqrt{n}}~times$}\\
+
+Total Number of iterations: \texttt{$n*\floor {\sqrt{n}}$ } = \underline{$\Theta{(n^{\frac{3}{2}})}$}\\\\
+ 
+ 
+ \textbf{Answer 4:}\\
+ 
+   \begin{lstlisting}
+int k, j;
+    for (k = 1; k <= n; ++k)
+        for (j = 1; j * j <= k; ++j) //Line is different from the 2nd line in (d).
+            { The execution time for the body of this loop is bounded by constants. }
+   \end{lstlisting}
+ 
+ Outer loop will iterate $n~times$ .\\
+ 
+ Inner loop is dependent of the value of \texttt{k}, therefore, \texttt{$\floor {\sqrt{k}}$} iterations in the $k^{th}~iteration$ of the outer loop.\\
+ 
+ Total number of iterations: 
+ \begin{align*}
+&\sum_{k=1}^{n} ~ \floor{\sqrt{k}} \\[7pt]
+&\sum_{k=1}^{n} ~ \sqrt{k} 
+ \end{align*}
+
+Therefore the time complexity for the loop is = \underline{ $\Theta{(n^{\frac{3}{2}})}$}
+\end{document}

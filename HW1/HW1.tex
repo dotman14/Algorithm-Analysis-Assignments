@@ -1,0 +1,126 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=0.6in]{geometry}
+\usepackage{mathtools}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\usepackage{amsmath}
+
+\begin{document}
+\title{B503 Homework Assignment 1}
+\author{Oyedotun Oyesanmi}
+\date{\today}
+\maketitle
+
+\textbf{Answer 1:}\\
+
+$Proof. $ We will prove by induction on $n$ that Eq. 1 holds fro all integers $n$\\
+
+$Base\ Case: $ When $n = 1$, both sides of Eq. (1) equals 1. Hence, Eq. (1) holds for $n = 1$.
+
+$Induction\ Step: $ Let $k$ be an arbitrary integer larger than or equal 1. \\
+
+Assume $ n = k$,
+
+\begin{equation}
+\sum_{i=1}^{k} i^{3} = \frac{k^{2}(k+1)^{2}}{4} \\
+\end{equation} 
+\\
+
+we will prove the equation when $n= k+1$
+
+\begin{equation}
+\sum_{i=1}^{k+1} i^{3} = \frac{(k+1)^{2}(k +2)^{2}}{4} \\
+\end{equation} 
+
+We have
+
+\begin{align*}
+\sum_{i=1}^{k+1} i^{3}
+&= \biggl(\sum_{i=1}^{n} i^{3}\biggr) +  (k+1)^3 \text{~~~~~~~~ inductive\ assumption\ Eq. (2)}\\[7pt]
+&= \frac{k^{2}(k+1)^{2}}{4} + (k+1)^3 \\[7pt]
+&= \frac{k^{2}(k+1)^{2} + 4(k+1)^3}{4}\\[7pt]
+&= \frac{(k+1)^{2}(k^{2} + 4k + 4)}{4}\\[7pt]
+&= \frac{(k+1)^{2}(k+2)^{2}}{4}\\[7pt]
+\end{align*}
+
+This proves that Eq. (3) holds.  By induction, Eq (1) holds for all positive integers $n$\\
+\\
+\\
+
+\textbf{Question 2 : } \\
+
+\textbf{(a)} $3n^2 + 100n + log(n) = O(n^2) $\\
+
+By the definition of Big-O, $3n^2 + 100n + log(n)$ is $O(n^2)$ if $3n^2 + 100n + log(n) \leq Cn^2$, and some $n \geq n_o$\\
+
+If 
+\begin{align*}
+3n^2 + 100n + log(n) \leq Cn^2
+\end{align*}
+
+then 
+
+\begin{align*}
+3 + \frac{100}{n} + \frac{log(n)}{n^2} \leq C
+\end{align*}
+
+Therefore, the $Big-O$ condition stands for $n \geq n_o = 10$ and $C \geq \frac{1301}{100}$ which is true, therefore 
+$$3n^2 + 100n + log(n) = O(n^2) $$\\
+\\
+
+\textbf{(b)} $(\sqrt{n} + 1)^8 = O(n^4) $\\
+
+By the definition of Big-O,
+\begin{align*}
+\lim_{n\to\infty} \abs*{\frac{f(n)}{g(n)}} < \infty \\
+\end{align*}
+
+that is
+
+\begin{align*}
+\lim_{n\to\infty} \abs*{\frac{f(n)}{g(n)}} = L \text{~~~ where L is a real number}\\
+\end{align*}
+
+\begin{align*}
+&= \lim_{n\to\infty} \frac{(\sqrt{n} + 1)^8}{n^4} \\[10pt]
+&= \lim_{n\to\infty} \frac{n^4+8n^{7/2}+ ....... + 1}{n^4} \text{~~~ using Binomial Expansion, highest power is 4}\\ \\[10pt]
+&=  \frac{1+0+ ....... + 0}{1} \\[10pt]
+&= 1\\[10pt]
+\end{align*}
+ 
+Since $\lim_{n\to\infty} (\frac{\sqrt{n} + 1)^8}{n^4}) = 1$ , therefore  $(\sqrt{n} + 1)^8 = O(n^4)$\\
+\\
+\\
+
+\textbf{Question 3 : } Prove by contradiction that $100n + 2 \neq O(\sqrt{n}).$\\
+
+Assume that $100n + 2 = O(\sqrt{n})$, which means that
+\begin{align*}
+\lim_{n\to\infty} \abs*{\frac{f(n)}{g(n)}} <\infty
+\end{align*}
+
+that is 
+
+\begin{align*}
+\lim_{n\to\infty} \abs*{\frac{f(n)}{g(n)}} = L \text{~~~ where L is a real number}\\
+\end{align*}
+
+If we substitute the values of $f(n)$ and $g(n)$ and evaluate $\lim_{n\to\infty}$, we get the following
+
+\begin{align}
+\lim_{n\to\infty} \frac{100n + 2}{\sqrt{n}}
+\end{align}
+
+
+\begin{align*}
+&= \lim_{n\to\infty} \frac{\frac{100n}{\sqrt{n}} + \frac{2}{\sqrt{n}}}{\frac{\sqrt{n}}{\sqrt{n}}}\\[10pt]
+&= \lim_{n\to\infty} \frac{100\sqrt{n} + \frac{2}{\sqrt{n}}}{1}\\[10pt]
+&= \frac{\infty + 0}{1}\\[10pt]
+&= \infty\\[10pt]
+\end{align*}
+
+Since $\lim_{n\to\infty} \frac{100n + 2}{\sqrt{n}} = \infty$ , that is a contradiction to Eq. (4). Therefore, $100n + 2 \neq O(\sqrt{n}).$\\
+
+
+\end{document}
